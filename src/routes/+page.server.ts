@@ -34,10 +34,11 @@ export const load: PageServerLoad = async ({ platform }) => {
   const cachedAnimeData = await apiCache.get(cacheKey);
 
   if (cachedAnimeData) {
-    return JSON.parse(cachedAnimeData);
+    const data: { data: Anime } = JSON.parse(cachedAnimeData);
+    return data.data;
   }
   try {
-    const response = await fetch(platform.env.BASE_URL, animeOptions);
+    const response = await fetch(env.BASE_URL, animeOptions);
     if (!response.ok) {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
