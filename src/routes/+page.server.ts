@@ -52,7 +52,7 @@ export const load: PageServerLoad = async ({ platform }) => {
 
   const response = await fetch(env.BASE_URL, animeOptions);
   const animeData: { data: Anime } = await response.json();
-  await platform?.env.API_CACHE.put(cacheKey, JSON.stringify(animeData), {
+  await apiCache.put(cacheKey, JSON.stringify(animeData), {
     expirationTtl: cacheTTL,
   });
 
