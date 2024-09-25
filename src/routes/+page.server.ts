@@ -30,7 +30,6 @@ export const load: PageServerLoad = async ({ platform }) => {
   if (!apiCache) {
     throw new Error("API_CACHE is not defined in the platform environment");
   }
-
   const cachedAnimeData = await apiCache.get(cacheKey);
 
   if (cachedAnimeData) {
@@ -38,7 +37,8 @@ export const load: PageServerLoad = async ({ platform }) => {
     return data.data;
   }
   try {
-    const response = await fetch(env.BASE_URL, animeOptions);
+    const baseURL = platform?.env.BASE_URL;
+    const response = await fetch(baseURL, animeOptions);
     if (!response.ok) {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }

@@ -3,9 +3,13 @@ name = "anime-db-svelte"
 pages_build_output_dir = ".svelte-kit/cloudflare"
 compatibility_date = "2024-09-24"
 
+[env.production]
+BASE_URL = "https://graphql.anilist.co"
+
 [[env.production.kv_namespaces]]
 binding = "API_CACHE"
 id = "90e74fe0b9ab4d00b8c92bdd6daf5bd2"
+
 
 [[kv_namespaces]]
 binding = "API_CACHE"
