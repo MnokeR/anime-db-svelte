@@ -27,8 +27,6 @@ export const load: PageServerLoad = async ({ platform }) => {
   const cacheTTL = 3600;
   const apiCache = platform?.env.API_CACHE;
 
-  console.log("Platform object:", platform);
-
   if (!apiCache) {
     throw new Error("API_CACHE is not defined in the platform environment");
   }
