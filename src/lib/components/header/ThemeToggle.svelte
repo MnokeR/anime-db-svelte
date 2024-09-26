@@ -1,5 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import Sun from "lucide-svelte/icons/sun";
+  import Moon from "lucide-svelte/icons/moon";
+  import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+  import { Button } from "$lib/components/ui/button/index.js";
 
   let theme: string;
   let prefersDark: boolean;
@@ -14,9 +18,8 @@
     theme = getInitialTheme();
   });
 
-  function setTheme(e: Event) {
-    const target = e.target as HTMLSelectElement;
-    if (target.value === "system") {
+  function setTheme(target: string) {
+    if (target === "system") {
       if (prefersDark) {
         document.documentElement.classList.add("dark");
         theme = "dark";
@@ -25,10 +28,10 @@
         theme = "light";
       }
     }
-    if (target.value === "light") {
+    if (target === "light") {
       document.documentElement.classList.remove("dark");
       theme = "light";
-    } else if (target.value === "dark") {
+    } else if (target === "dark") {
       document.documentElement.classList.add("dark");
       theme = "dark";
     }
@@ -36,8 +39,25 @@
   }
 </script>
 
-<select onchange={(e) => setTheme(e)} class="bg-background text-foreground">
-  <option value="system">System</option>
-  <option value="dark">Dark</option>
-  <option value="light">Light</option>
-</select>
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger asChild let:builder>
+    <Button builders={[builder]} variant="outline" size="icon">
+      <Sun
+        class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+      />
+      <Moon
+        class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+      />
+      <span class="sr-only">Toggle theme</span>
+    </Button>
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content align="end">
+    <DropdownMenu.Item onclick={() => setTheme("light")}
+      >Light</DropdownMenu.Item
+    >
+    <DropdownMenu.Item onclick={() => setTheme("dark")}>Dark</DropdownMenu.Item>
+    <DropdownMenu.Item onclick={() => setTheme("system")}
+      >System</DropdownMenu.Item
+    >
+  </DropdownMenu.Content>
+</DropdownMenu.Root>
