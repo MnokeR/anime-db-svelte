@@ -36,7 +36,9 @@
       />
     {/if}
   </div>
-  <p class="max-w-[210px] truncate text-sm text-center">
-    {data.title.userPreferred}
-  </p>
+  {#if transition}
+    <p class="max-w-[210px] truncate text-sm text-center">
+      {data.title.userPreferred}
+    </p>
+  {/if}
 </div>

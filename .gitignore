@@ -1,11 +1,11 @@
 node_modules
-
+/.wrangler
 # Output
 .output
 .vercel
 /.svelte-kit
 /build
-.wrangler
+
 
 # OS
 .DS_Store

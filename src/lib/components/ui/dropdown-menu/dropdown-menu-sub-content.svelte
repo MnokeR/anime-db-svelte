@@ -2,16 +2,9 @@
 	import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
 	import { cn, flyAndScale } from "$lib/utils.js";
 
-	type $$Props = DropdownMenuPrimitive.SubContentProps;
-	type $$Events = DropdownMenuPrimitive.SubContentEvents;
+	type Props = DropdownMenuPrimitive.SubContentProps;
 
-	let className: $$Props["class"] = undefined;
-	export let transition: $$Props["transition"] = flyAndScale;
-	export let transitionConfig: $$Props["transitionConfig"] = {
-		x: -10,
-		y: 0,
-	};
-	export { className as class };
+	let {class: className, children, transition = flyAndScale, transitionConfig = {x: -10, y: 0}, ...rest}: Props = $props()
 </script>
 
 <DropdownMenuPrimitive.SubContent
@@ -21,10 +14,7 @@
 		"bg-popover text-popover-foreground z-50 min-w-[8rem] rounded-md border p-1 shadow-lg focus:outline-none",
 		className
 	)}
-	{...$$restProps}
-	on:keydown
-	on:focusout
-	on:pointermove
+	{...rest}
 >
-	<slot />
+	{@render children?.()}
 </DropdownMenuPrimitive.SubContent>

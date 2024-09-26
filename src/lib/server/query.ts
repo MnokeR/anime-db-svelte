@@ -16,6 +16,7 @@ export const animeOptions = {
   headers: {
     "Content-Type": "application/json",
     accept: "application/json",
+    "Cache-Control": "public, max-age=60",
   },
   body: JSON.stringify({
     query: animeQuery,
