@@ -9,34 +9,36 @@
   };
 
   let { data }: AnimeCardProps = $props();
-  let transition = $state(false);
+  let imageLoaded = $state(false);
 
-  onMount(() => {
-    transition = true;
-  });
+  const handleImageLoad = () => {
+    imageLoaded = true;
+  };
 </script>
 
 <div class="flex flex-col">
   <div
     class="relative flex w-[210px] h-[294px] items-center justify-center rounded-xl overflow-hidden"
   >
-    {#if !transition}
+    {#if !imageLoaded}
       <div out:fade={{ duration: 200 }}>
         <Skeleton class="absolute inset-0 -z-10 w-full h-full" />
       </div>
     {/if}
-    {#if transition}
+    {#key imageLoaded}
       <img
         class="rounded-xl w-full h-full object-cover"
         src={data.coverImage.large}
         alt={`Cover for ${data.title.userPreferred}`}
         width={195}
         height={279}
+        onload={handleImageLoad}
+        style="visibility: {imageLoaded ? 'visible' : 'hidden'};"
         in:fade={{ duration: 200 }}
       />
-    {/if}
+    {/key}
   </div>
-  {#if transition}
+  {#if imageLoaded}
     <p class="max-w-[210px] truncate text-sm text-center">
       {data.title.userPreferred}
     </p>

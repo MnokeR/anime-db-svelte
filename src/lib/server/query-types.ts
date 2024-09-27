@@ -6,6 +6,13 @@ export type Anime = {
   nextSeason: { media: AnimeShort[] };
 };
 
+export type Manga = {
+  trending: { media: AnimeShort[] };
+  popular: { media: AnimeShort[] };
+  manhwa: { media: AnimeShort[] };
+  top: { media: AnimeShort[] };
+};
+
 export type AnimeShort = {
   id: number;
   title: {

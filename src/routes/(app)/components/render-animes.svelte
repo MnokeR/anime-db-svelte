@@ -1,14 +1,14 @@
 <script lang='ts'>
   import AnimeCard from '$lib/components/AnimeCard.svelte';
   import type { AnimeShort } from '$lib/server/query-types';
-  import { fade, fly, slide } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   type MediaCategory = {
     media: AnimeShort[];
   };
   type HomePageProps = {
     [key: string]: MediaCategory | undefined;
   };
-  let {data, ...rest}: {data: HomePageProps} = $props()
+  let {data}: {data: HomePageProps} = $props()
 </script>
 
 {#snippet category(cat: keyof HomePageProps, title: string)}
@@ -23,7 +23,9 @@
 {/snippet}
 
 
-<div {...rest}>
+<div 
+  in:fly={{ x: -1000, duration: 200, delay: 300 }}
+  out:fly={{ x: -1000, duration: 200 }}>
   {@render category('trending', 'Trending')}
   {@render category('season', 'Season')}
   {@render category('nextSeason', 'Next Season')}
