@@ -1,10 +1,20 @@
 <script lang="ts">
   import { Input } from "$lib/components/ui/input/index.js";
-  import { selectYears } from "$lib/search-select-options";
+  import { selectSeason, selectYears } from "$lib/search-select-options";
   import Select from "./Select.svelte";
 </script>
 
-<div class="flex justify-center">
-  <Input type="search" name="term" placeholder="search" class="max-w-[380px]" />
-  <Select option="Year" items={selectYears} />
+<div class="flex flex-col items-center space-y-3">
+  <div class="flex justify-center w-full">
+    <Input
+      type="search"
+      name="term"
+      placeholder="search"
+      class="w-max md:w-[380px]"
+    />
+  </div>
+  <div class="flex w-full justify-center space-x-3">
+    <Select selectOptions={selectYears} />
+    <Select selectOptions={selectSeason} />
+  </div>
 </div>

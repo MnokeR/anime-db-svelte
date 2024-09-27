@@ -3,26 +3,34 @@
   import { ScrollArea } from "$lib/components/ui/scroll-area/index.js";
 
   type SelectProps = {
-    option: string;
-    items: {
-      label: string | number;
-      value: string;
+    selectOptions: {
+      label: string;
+      items: {
+        label: string;
+        value: string | number;
+      }[];
     }[];
   };
-  let { option, items }: SelectProps = $props();
+
+  let { selectOptions }: SelectProps = $props();
+
+  let placeholder = $state(selectOptions[0].label);
 </script>
 
 <Select.Root>
-  <Select.Trigger class="w-[100px]">
-    <Select.Value placeholder={option} />
+  <Select.Trigger class="w-24">
+    <Select.Value {placeholder} />
   </Select.Trigger>
-  <Select.Content>
-    <ScrollArea class="h-[400px] w-auto">
-      <Select.Item value="none">{option}</Select.Item>
+  <Select.Content class="max-h-[420px]">
+    <Select.Input placeholder="Search" />
+    <ScrollArea orientation="vertical">
+      <Select.Item value={undefined} label="">Clear</Select.Item>
       <Select.Separator />
-      {#each items as item}
-        <Select.Item value={item.value}>{item.label}</Select.Item>
-      {/each}
+      <div class="max-h-[370px]">
+        {#each selectOptions[0].items as item}
+          <Select.Item value={item.value} label={item.label} />
+        {/each}
+      </div>
     </ScrollArea>
   </Select.Content>
 </Select.Root>

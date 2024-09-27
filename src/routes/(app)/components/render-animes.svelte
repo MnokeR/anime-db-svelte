@@ -1,18 +1,17 @@
-<script lang="ts">
-  import AnimeCard from "$lib/components/AnimeCard.svelte";
-  import type { AnimeShort } from "$lib/server/query-types";
-
+<script lang='ts'>
+  import AnimeCard from '$lib/components/AnimeCard.svelte';
+  import type { AnimeShort } from '$lib/server/query-types';
+  import { fade, fly, slide } from 'svelte/transition';
   type MediaCategory = {
     media: AnimeShort[];
   };
-  type PageData = {
-    [key: string]: MediaCategory | undefined
-  }
-  export let data: PageData;
-
+  type HomePageProps = {
+    [key: string]: MediaCategory | undefined;
+  };
+  let {data, ...rest}: {data: HomePageProps} = $props()
 </script>
 
-{#snippet category(cat: keyof PageData, title: string)}
+{#snippet category(cat: keyof HomePageProps, title: string)}
   {#if data[cat]}
     <h1 class="text-center">{title}</h1>
     <div class="flex flex-wrap gap-3 justify-center">
@@ -23,10 +22,11 @@
   {/if}
 {/snippet}
 
-<section class="max-w-[1440px] mx-auto">
+
+<div {...rest}>
   {@render category('trending', 'Trending')}
   {@render category('season', 'Season')}
   {@render category('nextSeason', 'Next Season')}
   {@render category('popular', 'Popular')}
   {@render category('top', 'Top Rated')}
-</section>
+</div>

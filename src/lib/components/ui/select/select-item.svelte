@@ -30,5 +30,15 @@
       <Check class="h-4 w-4" />
     </SelectPrimitive.ItemIndicator>
   </span>
-  {@render children?.()}
+  <!-- <slot>
+    {label || value}
+  </slot> -->
+  {#if children}
+    {@render children?.()}
+  {:else if label}
+    {label}
+  {:else if value}
+    {value}
+  {/if}
+  
 </SelectPrimitive.Item>
