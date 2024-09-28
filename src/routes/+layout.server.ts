@@ -64,5 +64,5 @@ export const load: LayoutServerLoad = async ({ platform }) => {
     }
   }
 
-  return data;
+  return { layoutData: data };
 };

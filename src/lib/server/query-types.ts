@@ -25,3 +25,14 @@ export type AnimeShort = {
   };
   format: string;
 };
+
+export type SearchResults = {
+  media: AnimeShort[];
+  pageInfo: {
+    total: number;
+    perPage: number;
+    currentPage: number;
+    lastPage: number;
+    hasNextPage: boolean;
+  };
+};

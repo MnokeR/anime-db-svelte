@@ -3,7 +3,9 @@ const years = [];
 for (let i = year + 1; i >= 1940; i--) {
   years.push({ label: String(i), value: i });
 }
-export const selectYears = [{ label: "Years", items: years }];
+export const selectYears = [{ label: "Year", items: years }];
+
+type year = keyof typeof selectYears;
 
 export const selectSeason = [
   {
