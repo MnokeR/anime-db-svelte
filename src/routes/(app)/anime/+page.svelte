@@ -7,6 +7,8 @@
   import type { LayoutData } from "../../$types";
   import RenderAnimes from "./components/render-animes.svelte";
   import RenderSearch from "./components/render-search.svelte";
+  import InView from "$lib/components/InView.svelte";
+  import { Loader } from "lucide-svelte";
 
   type PageData = LayoutData & { searchData: SearchData }
   type SearchData = { Page: SearchResults }
@@ -15,16 +17,26 @@
 
   let animes = $state([data.searchData])
   let pageInfo = $state(data.searchData?.Page.pageInfo)
+  let fetchingNextPage = $state(false)
   
   const searchParams = $page.url.searchParams      
   const fetchNextPage = async () => {
     const BASE_URL = 'https://graphql.anilist.co'
-    if (!pageInfo.hasNextPage) return;
-
+    if (!pageInfo.hasNextPage || fetchingNextPage) return;
+    fetchingNextPage = true
+    const params = {
+      search: searchParams.get('term') || undefined,
+      year: searchParams.get('year') || undefined,
+      season: searchParams.get('season') || undefined,
+      sort: searchParams.get('sort') || undefined
+    }
     const variables = {
       type: 'ANIME',
       page: pageInfo.currentPage + 1,
-      search: searchParams.get('term')
+      search: params.search,
+      year: params.year ? params.year + '%' : undefined,
+      season: params.season,
+      sort: params.sort ? params.sort : params.search ? 'SEARCH_MATCH' : undefined
     }
     const options = {
       method: 'post',
@@ -42,6 +54,7 @@
     const searchData: {data: SearchData} = await response.json()
     animes = [...animes, searchData.data]
     pageInfo = searchData.data.Page.pageInfo
+    fetchingNextPage = false
   }
 
   $effect(() => {
@@ -61,13 +74,19 @@
       <RenderAnimes data={data.layoutData.anime!} />
   {/if}
   {#if data.searchData}
-
     <h1 class="text-center">Search</h1>
-    {#each animes as list}
-      <RenderSearch data={list?.Page} />
-     {/each}     
-  {#if pageInfo?.hasNextPage}
-    <button onclick={fetchNextPage}>next page</button>
-  {/if}
+    <div class='flex flex-wrap gap-3 justify-center'>
+      {#each animes as list}
+        <RenderSearch data={list?.Page} />
+      {/each}  
+    </div>
+    <div class="flex justify-center">
+      {#if pageInfo?.hasNextPage && !fetchingNextPage}
+      <InView loadMore={fetchNextPage} />
+      {/if}
+      {#if fetchingNextPage}
+        <Loader class='animate-spin' />
+      {/if}
+    </div>
   {/if}
 </section>

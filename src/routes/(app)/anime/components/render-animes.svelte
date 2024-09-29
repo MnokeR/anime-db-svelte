@@ -21,7 +21,6 @@
   {/if}
 {/snippet}
 
-
 <div>
   {@render category('trending', 'Trending')}
   {@render category('season', 'Season')}

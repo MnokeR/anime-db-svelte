@@ -5,9 +5,6 @@
   let { data }: { data: SearchResults } = $props();
 </script>
 
-<h1 class="text-center">Search</h1>
-<div class="flex flex-wrap gap-3 justify-center">
-  {#each data.media as manga}
-    <AnimeCard data={manga} />
-  {/each}
-</div>
+{#each data?.media as manga}
+  <AnimeCard data={manga} />
+{/each}

@@ -17,7 +17,7 @@
 
 <div class="flex flex-col">
   <div
-    class="relative flex w-[210px] h-[294px] items-center justify-center rounded-xl overflow-hidden"
+    class="relative flex w-[140px] h-[210px] md:w-[210px] md:h-[294px] items-center justify-center rounded-xl overflow-hidden"
   >
     {#if !imageLoaded}
       <div>
@@ -38,7 +38,9 @@
     {/key}
   </div>
   {#if imageLoaded}
-    <p class="max-w-[210px] truncate text-sm text-center">
+    <p
+      class="w-[140px] md:w-[210px] line-clamp-2 text-xs md:text-sm m-2 opacity-80"
+    >
       {data.title.userPreferred}
     </p>
   {/if}
