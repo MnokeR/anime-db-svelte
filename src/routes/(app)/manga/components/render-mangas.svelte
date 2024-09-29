@@ -13,7 +13,7 @@
 {#snippet category(cat: keyof HomePageProps, title: string)}
   {#if data[cat]}
     <h1 class="text-center">{title}</h1>
-    <div class="flex flex-wrap gap-3 justify-center">
+    <div class="flex flex-wrap justify-center gap-3">
     {#each data[cat].media as category}
       <AnimeCard data={category} />
     {/each}
@@ -21,9 +21,8 @@
   {/if}
 {/snippet}
 
-<div>
-  {@render category('trending', 'Trending')}
-  {@render category('manhwa', 'Manhwa')}
-  {@render category('popular', 'Popular')}
-  {@render category('top', 'Top Rated')}
-</div>
+
+{@render category('trending', 'Trending')}
+{@render category('manhwa', 'Manhwa')}
+{@render category('popular', 'Popular')}
+{@render category('top', 'Top Rated')}

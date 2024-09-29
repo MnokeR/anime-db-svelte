@@ -17,7 +17,7 @@
 
 <div class="flex flex-col">
   <div
-    class="relative flex w-[140px] h-[210px] md:w-[210px] md:h-[294px] items-center justify-center rounded-xl overflow-hidden"
+    class="relative flex w-[130px] h-[182px] md:w-[210px] md:h-[294px] justify-center rounded-xl"
   >
     {#if !imageLoaded}
       <div>
@@ -39,7 +39,7 @@
   </div>
   {#if imageLoaded}
     <p
-      class="w-[140px] md:w-[210px] line-clamp-2 text-xs md:text-sm m-2 opacity-80"
+      class="w-[130px] md:w-[210px] line-clamp-2 text-xs md:text-sm p-2 opacity-80"
     >
       {data.title.userPreferred}
     </p>

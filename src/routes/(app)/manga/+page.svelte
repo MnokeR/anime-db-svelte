@@ -69,25 +69,25 @@
   <SelectMediaType />
   <Form />
 </section>
-<section class="max-w-[1440px] mx-auto overflow-hidden py-10">
+<section class="max-w-[1440px] mx-auto py-10">
   {#if !data.searchData}
     <RenderMangas data={data.layoutData.manga!} />
   {/if}
   {#if data.searchData}
-  <h1 class="text-center">Search</h1>
-  <div class='flex flex-wrap gap-3 justify-center'>
-    {#each mangas as list}
-      <RenderSearch data={list?.Page} />
-    {/each}  
-  </div>
-  <div class="flex justify-center">
-    {#if pageInfo?.hasNextPage && !fetchingNextPage}
-    <InView loadMore={fetchNextPage} />
-    {/if}
-    {#if fetchingNextPage}
-      <Loader class='animate-spin' />
-    {/if}
-  </div>
+    <h1 class="text-center">Search</h1>
+    <div class='flex flex-wrap justify-center gap-3'>
+      {#each mangas as list}
+        <RenderSearch data={list?.Page} />
+      {/each}  
+    </div>
+    <div class="flex justify-center">
+      {#if pageInfo?.hasNextPage && !fetchingNextPage}
+      <InView loadMore={fetchNextPage} />
+      {/if}
+      {#if fetchingNextPage}
+        <Loader class='animate-spin' />
+      {/if}
+    </div>
   {/if}
 </section>
  

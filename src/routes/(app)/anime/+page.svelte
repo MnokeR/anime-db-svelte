@@ -69,13 +69,13 @@
   <SelectMediaType />
   <Form />
 </section>
-<section class="max-w-[1440px] mx-auto overflow-hidden py-10">
+<section class="max-w-[1440px] mx-auto py-10">
   {#if !data.searchData}
       <RenderAnimes data={data.layoutData.anime!} />
   {/if}
   {#if data.searchData}
     <h1 class="text-center">Search</h1>
-    <div class='flex flex-wrap gap-3 justify-center'>
+    <div class='flex flex-wrap justify-center gap-3'>
       {#each animes as list}
         <RenderSearch data={list?.Page} />
       {/each}  
