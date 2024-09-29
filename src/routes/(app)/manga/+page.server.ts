@@ -6,6 +6,7 @@ export const load: ServerLoad = async ({ url, platform }) => {
   const BASE_URL = platform!.env.BASE_URL;
   const searchParams = url.searchParams;
   const hasParams = [...searchParams.keys()].length > 0;
+
   const params = {
     search: searchParams.get("term") || undefined,
     format: searchParams.get("format") || undefined,
@@ -13,6 +14,7 @@ export const load: ServerLoad = async ({ url, platform }) => {
     season: searchParams.get("season") || undefined,
     sort: searchParams.get("sort") || undefined,
   };
+
   const mangaSearchVariables = {
     page: 1,
     type: "MANGA",

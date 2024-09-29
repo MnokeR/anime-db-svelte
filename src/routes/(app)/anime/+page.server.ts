@@ -13,6 +13,7 @@ export const load: ServerLoad = async ({ url, platform }) => {
     season: searchParams.get("season") || undefined,
     sort: searchParams.get("sort") || undefined,
   };
+
   const animeSearchVariables = {
     page: 1,
     type: "ANIME",

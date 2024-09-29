@@ -1,7 +1,6 @@
 <script lang='ts'>
   import AnimeCard from '$lib/components/AnimeCard.svelte';
   import type { AnimeShort } from '$lib/server/query-types';
-  import { fly } from 'svelte/transition';
   type MediaCategory = {
     media: AnimeShort[];
   };
@@ -23,9 +22,7 @@
 {/snippet}
 
 
-<div 
-  in:fly={{ x: -1000, duration: 200, delay: 300 }}
-  out:fly={{ x: -1000, duration: 200 }}>
+<div>
   {@render category('trending', 'Trending')}
   {@render category('season', 'Season')}
   {@render category('nextSeason', 'Next Season')}

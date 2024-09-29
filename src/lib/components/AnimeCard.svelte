@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { AnimeShort } from "$lib/server/query-types";
-  import { onMount } from "svelte";
   import Skeleton from "./ui/Skeleton.svelte";
-  import { fade } from "svelte/transition";
+  import { scale } from "svelte/transition";
 
   type AnimeCardProps = {
     data: AnimeShort;
@@ -21,7 +20,7 @@
     class="relative flex w-[210px] h-[294px] items-center justify-center rounded-xl overflow-hidden"
   >
     {#if !imageLoaded}
-      <div out:fade={{ duration: 200 }}>
+      <div>
         <Skeleton class="absolute inset-0 -z-10 w-full h-full" />
       </div>
     {/if}
@@ -34,7 +33,7 @@
         height={279}
         onload={handleImageLoad}
         style="visibility: {imageLoaded ? 'visible' : 'hidden'};"
-        in:fade={{ duration: 200 }}
+        in:scale={{ duration: 300 }}
       />
     {/key}
   </div>

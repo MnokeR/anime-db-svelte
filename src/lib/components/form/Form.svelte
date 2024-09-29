@@ -37,7 +37,7 @@
       name="term"
       value={term}
       placeholder="search"
-      class="w-max md:w-[380px]"
+      class="w-full md:w-[600px] mx-5"
       oninput={debounceHandleChange}
     />
   </div>
