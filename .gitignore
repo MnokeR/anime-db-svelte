@@ -5,7 +5,7 @@ node_modules
 /.svelte-kit
 /build
 
-/.wrangler
+.wrangler/
 
 
 # OS

@@ -18,3 +18,13 @@ export const selectSeason = [
     ],
   },
 ];
+
+export const mediaType = [
+  {
+    label: "Type",
+    items: [
+      { label: "Anime", value: "ANIME" },
+      { label: "Manga", value: "MANGA" },
+    ],
+  },
+];

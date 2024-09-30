@@ -3,7 +3,11 @@
   import { page } from "$app/stores";
   import { Input } from "$lib/components/ui/input/index.js";
   import { debounce } from "$lib/debounce";
-  import { selectSeason, selectYears } from "$lib/search-select-options";
+  import {
+    mediaType,
+    selectSeason,
+    selectYears,
+  } from "$lib/search-select-options";
   import Select from "./Select.svelte";
 
   const searchParams = $page.url.searchParams;
