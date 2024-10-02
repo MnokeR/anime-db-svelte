@@ -18,32 +18,36 @@
   let open = $state(false);
   const searchParams = $page.url.searchParams;
   const param = paramName ? paramName : options.title.toLowerCase();
-  let value = $state<string | string[]>(findInitialParams());
+  let value = $state<string[] | "">(getInitialValue());
 
-  function findInitialParams() {
+  function getInitialValue() {
     const values = searchParams.get(param);
     if (values) {
-      return values;
+      const splitValues = values.split(",").map((item) => item.trim());
+      return splitValues;
     }
     return "";
   }
 
   let selectedValue = $derived(
-    options.items.find((f) => f.value === value)?.label || options.title
+    typeof value === "object" && value.length > 0 ? value : options.title
   );
+  $inspect(searchParams.get(param));
 
   function closeAndFocusTrigger(triggerId: string) {
     open = false;
     tick().then(() => {
       document.getElementById(triggerId)?.focus();
     });
+    setParams();
   }
 
   function updateSearchParams() {
     goto(`?${searchParams.toString()}`, { replaceState: true });
   }
+
   function setParams() {
-    if (!value) {
+    if (value === "") {
       searchParams.delete(param);
     }
     if (value) {
@@ -66,9 +70,13 @@
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      class={`w-[180px] justify-between truncate overflow-hidden ${selectedValue === options.title && "text-muted-foreground"}`}
+      class={`w-[180px] flex justify-between ${selectedValue === options.title && "text-muted-foreground"}`}
     >
-      {selectedValue}
+      {#if Array.isArray(selectedValue) && selectedValue.length > 0}
+        {`${selectedValue[0]} (${selectedValue.length})`}
+      {:else}
+        {selectedValue}
+      {/if}
       {#if selectedValue === options.title}
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       {:else}
@@ -96,19 +104,22 @@
                 class="flex justify-between"
                 value={item.value}
                 onSelect={(currentValue) => {
-                  if (currentValue === value) {
-                    value = "";
+                  if (Array.isArray(value) && value.includes(currentValue)) {
+                    const removeValue = value.filter(
+                      (item) => item !== currentValue
+                    );
+                    value = removeValue;
                   } else {
-                    value = currentValue;
+                    value = [...value, currentValue];
                   }
-                  setParams();
                   closeAndFocusTrigger(ids.trigger);
                 }}
-                >{item.label}
+              >
+                {item.label}
                 <Check
                   class={cn(
                     "mr-2 h-4 w-4",
-                    value !== item.value && "text-transparent"
+                    !value.includes(item.value) && "text-transparent"
                   )}
                 />
               </Command.Item>

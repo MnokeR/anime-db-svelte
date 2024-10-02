@@ -3,12 +3,12 @@
   import Form from "$lib/components/form/Form.svelte";
   import InView from "$lib/components/InView.svelte";
   import SelectMediaType from "$lib/components/SelectMediaType.svelte";
-  import { mangaSearchQuery } from "$lib/query";
+  import { mangaCategories, mangaSearchQuery } from "$lib/query";
   import type { SearchResults } from "$lib/server/query-types";
   import { Loader } from "lucide-svelte";
-  import type { LayoutData } from "../../$types";
-  import RenderMangas from "./components/render-mangas.svelte";
-  import RenderSearch from "./components/render-search.svelte";
+  import type { LayoutData } from "../../../$types";
+  import RenderDefault from "../../components/render-default.svelte";
+  import RenderSearch from "../../components/render-search.svelte";
 
   type PageData = LayoutData & { searchData: SearchData }
   type SearchData = { Page: SearchResults }
@@ -71,7 +71,7 @@
 </section>
 <section class="max-w-[1440px] mx-auto py-10">
   {#if !data.searchData}
-    <RenderMangas data={data.layoutData.manga!} />
+    <RenderDefault data={data.layoutData.manga!} categories={mangaCategories} />
   {/if}
   {#if data.searchData}
     <h1 class="text-center">Search</h1>

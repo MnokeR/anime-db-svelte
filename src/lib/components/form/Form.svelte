@@ -4,17 +4,26 @@
   import { Input } from "$lib/components/ui/input/index.js";
   import { debounce } from "$lib/debounce";
   import {
-    mediaType,
+    selectAnimeFormat,
+    selectAnimeStatus,
+    selectCountry,
+    selectGenres,
+    selectMangaFormat,
+    selectMangaStatus,
     selectSeason,
+    selectSort,
     selectYears,
   } from "$lib/search-select-options";
   import Select from "./Select.svelte";
+  import SelectMulti from "./SelectMulti.svelte";
 
   const searchParams = $page.url.searchParams;
+  const path = $page.url.pathname;
+  const mediaType = $state(path === "/search/anime" ? "Anime" : "Manga");
   let term = $state(searchParams.get("term") || "");
 
   const updateSearchParams = () => {
-    goto(`?${searchParams.toString()}`, { replaceState: true });
+    goto(`?${searchParams.toString()}`, { replaceState: false });
   };
 
   const handleChange = (e: Event) => {
@@ -38,6 +47,7 @@
   <div class="flex justify-center w-full">
     <Input
       type="search"
+      autocomplete="off"
       name="term"
       value={term}
       placeholder="search"
@@ -45,8 +55,19 @@
       oninput={debounceHandleChange}
     />
   </div>
-  <div class="flex w-full justify-center space-x-3">
-    <Select selectOptions={selectYears} />
-    <Select selectOptions={selectSeason} />
+  <div class="flex w-full flex-wrap justify-center gap-3">
+    <SelectMulti options={selectGenres} />
+    <Select options={selectYears} />
+    {#if mediaType === "Anime"}
+      <Select options={selectSeason} />
+      <Select options={selectAnimeFormat} />
+      <Select options={selectAnimeStatus} paramName="status" />
+    {/if}
+    {#if mediaType === "Manga"}
+      <Select options={selectMangaFormat} />
+      <Select options={selectMangaStatus} paramName="status" />
+    {/if}
+    <Select options={selectCountry} paramName="countryOfOrigin" />
+    <Select options={selectSort} />
   </div>
 </div>

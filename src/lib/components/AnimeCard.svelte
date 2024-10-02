@@ -39,7 +39,7 @@
   </div>
   {#if imageLoaded}
     <p
-      class="w-[130px] md:w-[210px] line-clamp-2 text-xs md:text-sm p-2 opacity-80"
+      class="w-[130px] md:w-[210px] line-clamp-2 text-xs md:text-sm pt-2 px-2 opacity-80"
     >
       {data.title.userPreferred}
     </p>
