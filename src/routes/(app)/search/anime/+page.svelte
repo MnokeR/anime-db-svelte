@@ -66,6 +66,10 @@
   })
 
 </script>
+<svelte:head>
+	<title>Anime DB | Search Anime</title>
+	<meta name="description" content="Discover new Animes or search for your favorite!" />
+</svelte:head>
 
 <section class="max-w-screen-xl mx-auto rounded-md px-5">
   <div class="bg-secondary rounded-md pb-4">

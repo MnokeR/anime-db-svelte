@@ -5,6 +5,14 @@
 
   let { data }: { data: LayoutData } = $props();
 </script>
+<svelte:head>
+	<title>Anime DB Svelte</title>
+	<meta name="description" content="Anime DB build using Svelte" />
+</svelte:head>
+
+<section class="flex justify-center">
+  <img src="/images/herobg.webp" alt="Hero BG" width={1200} height={469}>
+</section>
 
 <section class="md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto py-10">
   <RenderDefault data={data.layoutData.anime!} categories={animeCategories} />

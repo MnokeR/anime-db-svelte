@@ -47,6 +47,7 @@ export const load: ServerLoad = async ({ url, platform }) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
+      "Cache-Control": "public, max-age=900",
     },
     body: JSON.stringify({
       query: animeSearchQuery,

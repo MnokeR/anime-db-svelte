@@ -62,8 +62,11 @@
     mangas = [data.searchData]
     pageInfo = data.searchData?.Page.pageInfo
   })
-  
 </script>
+<svelte:head>
+	<title>Anime DB | Search Manga</title>
+	<meta name="description" content="Discover new Mangas or search for your favorite!" />
+</svelte:head>
 
 <section class="max-w-screen-xl mx-auto rounded-md px-5">
   <div class="bg-secondary rounded-md pb-4">
