@@ -65,16 +65,24 @@
   
 </script>
 
-<section>
-  <SelectMediaType />
-  <Form />
+<section class="max-w-screen-xl mx-auto rounded-md px-5">
+  <div class="bg-secondary rounded-md pb-4">
+    <SelectMediaType />
+    <Form />
+  </div>
 </section>
-<section class="max-w-[1440px] mx-auto py-10">
+<section class="md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto py-10">
   {#if !data.searchData}
     <RenderDefault data={data.layoutData.manga!} categories={mangaCategories} />
   {/if}
   {#if data.searchData}
-    <h1 class="text-center">Search</h1>
+    <div class="text-muted-foreground text-center py-4">
+      <h1 class="font-semibold text-lg">Search</h1>
+      {#if searchParams.get('term')}
+        <p>"{searchParams.get('term')}"</p>
+      {/if}
+      
+    </div>
     <div class='flex flex-wrap justify-center gap-3'>
       {#each mangas as list}
         <RenderSearch data={list?.Page} />

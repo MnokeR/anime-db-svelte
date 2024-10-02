@@ -18,7 +18,9 @@
 
 {#each categories as category}
   {#if data[category.value]}
-    <h1 class="text-center">{category.label}</h1>
+    <h1 class="py-4 font-semibold text-lg text-muted-foreground pl-5">
+      {category.label}
+    </h1>
     <div class="flex flex-wrap justify-center gap-3">
       {#each data[category.value]?.media || [] as media}
         <AnimeCard data={media} />

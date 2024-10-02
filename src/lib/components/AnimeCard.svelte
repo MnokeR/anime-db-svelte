@@ -3,11 +3,7 @@
   import Skeleton from "./ui/Skeleton.svelte";
   import { scale } from "svelte/transition";
 
-  type AnimeCardProps = {
-    data: AnimeShort;
-  };
-
-  let { data }: AnimeCardProps = $props();
+  let { data }: { data: AnimeShort } = $props();
   let imageLoaded = $state(false);
 
   const handleImageLoad = () => {
@@ -17,7 +13,7 @@
 
 <div class="flex flex-col">
   <div
-    class="relative flex w-[130px] h-[182px] md:w-[210px] md:h-[294px] justify-center rounded-xl"
+    class="relative flex w-[130px] h-[182px] md:w-[157px] md:h-[216px] xl:w-[200px] xl:h-[280px] justify-center rounded-xl"
   >
     {#if !imageLoaded}
       <div>
@@ -26,7 +22,7 @@
     {/if}
     {#key imageLoaded}
       <img
-        class="rounded-xl w-full h-full object-cover"
+        class="rounded-xl w-full h-full object-cover transition-all"
         src={data.coverImage.large}
         alt={`Cover for ${data.title.userPreferred}`}
         width={195}
@@ -39,7 +35,7 @@
   </div>
   {#if imageLoaded}
     <p
-      class="w-[130px] md:w-[210px] line-clamp-2 text-xs md:text-sm pt-2 px-2 opacity-80"
+      class="w-[130px] lg:w-[157px] xl:w-[200px] line-clamp-2 text-xs md:text-sm pt-2 px-2 opacity-80"
     >
       {data.title.userPreferred}
     </p>

@@ -32,7 +32,6 @@
   let selectedValue = $derived(
     typeof value === "object" && value.length > 0 ? value : options.title
   );
-  $inspect(searchParams.get(param));
 
   function closeAndFocusTrigger(triggerId: string) {
     open = false;

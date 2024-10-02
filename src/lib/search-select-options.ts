@@ -60,7 +60,7 @@ export const selectAnimeFormat: SelectProps = {
     { label: "TV Show", value: "TV" },
     { label: "Movie", value: "MOVIE" },
     { label: "TV Short", value: "TV_SHORT" },
-    { label: "Special", value: "Special" },
+    { label: "Special", value: "SPECIAL" },
     { label: "OVA", value: "OVA" },
     { label: "ONA", value: "ONA" },
     { label: "Music", value: "MUSIC" },

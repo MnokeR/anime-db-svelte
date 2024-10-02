@@ -1,7 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
-  import { Input } from "$lib/components/ui/input/index.js";
   import { debounce } from "$lib/debounce";
   import {
     selectAnimeFormat,
@@ -14,6 +13,7 @@
     selectSort,
     selectYears,
   } from "$lib/search-select-options";
+  import Input from "./Input.svelte";
   import Select from "./Select.svelte";
   import SelectMulti from "./SelectMulti.svelte";
 
@@ -44,17 +44,7 @@
 </script>
 
 <div class="flex flex-col items-center space-y-3">
-  <div class="flex justify-center w-full">
-    <Input
-      type="search"
-      autocomplete="off"
-      name="term"
-      value={term}
-      placeholder="search"
-      class="w-full md:w-[600px] mx-5"
-      oninput={debounceHandleChange}
-    />
-  </div>
+  <Input {term} {debounceHandleChange} />
   <div class="flex w-full flex-wrap justify-center gap-3">
     <SelectMulti options={selectGenres} />
     <Select options={selectYears} />

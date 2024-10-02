@@ -9,6 +9,7 @@
   import type { LayoutData } from "../../../$types";
   import RenderDefault from "../../components/render-default.svelte";
   import RenderSearch from "../../components/render-search.svelte";
+  import Skeleton from "$lib/components/ui/Skeleton.svelte";
   
   type PageData = LayoutData & { searchData: SearchData }
   type SearchData = { Page: SearchResults }
@@ -18,6 +19,7 @@
   let animes = $state([data.searchData])
   let pageInfo = $state(data.searchData?.Page.pageInfo)
   let fetchingNextPage = $state(false)
+  let imageLoaded = $state(false)
   
   const searchParams = $page.url.searchParams      
   const fetchNextPage = async () => {
@@ -65,16 +67,19 @@
 
 </script>
 
-<section>
+<section class="max-w-screen-xl mx-auto rounded-md px-5">
+  <div class="bg-secondary rounded-md pb-4">
   <SelectMediaType />
   <Form />
+</div>
 </section>
-<section class="max-w-[1440px] mx-auto py-10">
+<section class="md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto py-10">
   {#if !data.searchData}
       <RenderDefault data={data.layoutData.anime!} categories={animeCategories} />
   {/if}
   {#if data.searchData}
-    <h1 class="text-center">Search</h1>
+  <h1 class="py-4 font-semibold text-lg text-muted-foreground text-center">
+    Search</h1>
     <div class='flex flex-wrap justify-center gap-3'>
       {#each animes as list}
         <RenderSearch data={list?.Page} />
