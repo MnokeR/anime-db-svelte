@@ -13,7 +13,7 @@
 
 <div class="flex flex-col">
   <div
-    class="relative flex w-[130px] h-[182px] md:w-[157px] md:h-[216px] xl:w-[200px] xl:h-[280px] justify-center rounded-xl"
+    class="relative flex w-[130px] h-[182px] lg:w-[157px] lg:h-[216px] xl:w-[200px] xl:h-[280px] justify-center rounded-xl"
   >
     {#if !imageLoaded}
       <div>

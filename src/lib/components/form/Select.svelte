@@ -40,7 +40,7 @@
   }
 
   function updateSearchParams() {
-    goto(`?${searchParams.toString()}`, { replaceState: true });
+    goto(`?${searchParams.toString()}`, { invalidateAll: true });
   }
   function setParams() {
     if (!value) {

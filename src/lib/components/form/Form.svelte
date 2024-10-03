@@ -20,10 +20,10 @@
   const searchParams = $page.url.searchParams;
   const path = $page.url.pathname;
   const mediaType = $state(path === "/search/anime" ? "Anime" : "Manga");
-  let term = $state(searchParams.get("term") || "");
+  let search = $state(searchParams.get("search") || "");
 
   const updateSearchParams = () => {
-    goto(`?${searchParams.toString()}`, { replaceState: false });
+    goto(`?${searchParams.toString()}`, { invalidateAll: true });
   };
 
   const handleChange = (e: Event) => {
@@ -36,15 +36,15 @@
       searchParams.set(param, value);
     }
     updateSearchParams();
-    if (param === "term") {
-      term = value;
+    if (param === "search") {
+      search = value;
     }
   };
   const debounceHandleChange = debounce(handleChange);
 </script>
 
 <div class="flex flex-col items-center space-y-3">
-  <Input {term} {debounceHandleChange} />
+  <Input {search} {debounceHandleChange} />
   <div class="flex w-full flex-wrap justify-center gap-3">
     <SelectMulti options={selectGenres} />
     <Select options={selectYears} />

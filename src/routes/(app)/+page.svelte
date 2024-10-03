@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { LayoutData } from "../$types";
   import RenderDefault from "./components/render-default.svelte";
-  import { animeCategories } from "$lib/query";
+  import { animeCategories } from "$lib/client/query";
 
   let { data }: { data: LayoutData } = $props();
 </script>
@@ -11,7 +11,7 @@
 </svelte:head>
 
 <section class="flex justify-center">
-  <img src="/images/herobg.webp" alt="Hero BG" width={1200} height={469}>
+  <img class="h-[469px] object-cover" src="/images/herobg.webp" alt="Hero BG" width={1200} height={469}>
 </section>
 
 <section class="md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto py-10">
