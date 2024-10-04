@@ -69,7 +69,7 @@
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      class={`w-[180px] flex justify-between ${selectedValue === options.title && "text-muted-foreground"}`}
+      class={`w-[140px] flex justify-between ${selectedValue === options.title && "text-muted-foreground"}`}
     >
       {#if Array.isArray(selectedValue) && selectedValue.length > 0}
         {`${selectedValue[0]} (${selectedValue.length})`}

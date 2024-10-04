@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SearchResults } from "$lib/server/query-types";
+  import type { SearchResults } from "$lib/types/types";
   import type { LayoutData } from "../../../$types";
   import RenderPage from "../../components/render-page.svelte";
 

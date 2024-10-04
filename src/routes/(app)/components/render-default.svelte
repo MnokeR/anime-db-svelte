@@ -1,6 +1,6 @@
 <script lang="ts">
   import AnimeCard from "$lib/components/AnimeCard.svelte";
-  import type { AnimeShort } from "$lib/server/query-types";
+  import type { AnimeShort } from "$lib/types/types";
   type MediaCategory = {
     media: AnimeShort[];
   };

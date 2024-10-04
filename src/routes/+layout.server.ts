@@ -1,5 +1,5 @@
 import { animeOptions, mangaOptions } from "$lib/server/query";
-import type { Anime, Manga } from "$lib/server/query-types";
+import type { Anime, Manga } from "$lib/types/types";
 import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = async ({ platform }) => {

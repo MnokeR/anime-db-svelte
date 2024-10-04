@@ -43,9 +43,9 @@
   const debounceHandleChange = debounce(handleChange);
 </script>
 
-<div class="flex flex-col items-center space-y-3">
+<div class="flex flex-col items-center space-y-1">
   <Input {search} {debounceHandleChange} />
-  <div class="flex w-full flex-wrap justify-center gap-3">
+  <div class="flex w-full flex-wrap justify-center gap-1">
     <SelectMulti options={selectGenres} />
     <Select options={selectYears} />
     {#if mediaType === "Anime"}

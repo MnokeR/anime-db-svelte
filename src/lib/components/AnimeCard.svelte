@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { AnimeShort } from "$lib/server/query-types";
+  import type { AnimeShort } from "$lib/types/types";
   import Skeleton from "./ui/Skeleton.svelte";
   import { scale } from "svelte/transition";
 

@@ -1,5 +1,5 @@
 import { getParams, searchOptions } from "$lib/server/query";
-import type { SearchResults } from "$lib/server/query-types";
+import type { SearchResults } from "$lib/types/types";
 import type { ServerLoad } from "@sveltejs/kit";
 
 export const load: ServerLoad = async ({ url, platform }) => {
@@ -10,7 +10,6 @@ export const load: ServerLoad = async ({ url, platform }) => {
 
   const params = getParams(searchParams);
   const animeSearchOptions = searchOptions({ params, mediaType });
-  console.log("Reached Loader");
   if (!hasParams) {
     return;
   }
@@ -21,7 +20,6 @@ export const load: ServerLoad = async ({ url, platform }) => {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
     const animeSearchData: { data: SearchResults } = await response.json();
-    console.log("Reached Data");
     return { searchData: animeSearchData.data };
   } catch (error) {
     console.error("Error fetching anime data:", error);

@@ -1,5 +1,5 @@
 import { getParams, searchOptions } from "$lib/server/query";
-import type { SearchResults } from "$lib/server/query-types";
+import type { SearchResults } from "$lib/types/types";
 import type { ServerLoad } from "@sveltejs/kit";
 
 export const load: ServerLoad = async ({ url, platform }) => {

@@ -2,8 +2,8 @@
   import { page } from "$app/stores";
   import Form from "$lib/components/form/Form.svelte";
   import SelectMediaType from "$lib/components/SelectMediaType.svelte";
-  import { animeCategories, BASE_URL, mangaCategories, searchOptions, type SearchVariableParams } from "$lib/client/query";
-  import type { Anime, Manga, SearchResults } from "$lib/server/query-types";
+  import { animeCategories, BASE_URL, getParams, mangaCategories, searchOptions } from "$lib/client/query";
+  import type { Anime, Manga, SearchResults } from "$lib/types/types";
   import InView from "$lib/components/InView.svelte";
   import { Loader } from "lucide-svelte";
   import RenderDefault from "./render-default.svelte";
@@ -14,11 +14,11 @@
         anime?: Anime;
         manga?: Manga;
     };
-} & {
+    } & {
     searchData: SearchData;
-}
-type SearchData = { Page: SearchResults }
-type MediaType = 'Anime' | 'Manga'
+    }
+  type SearchData = { Page: SearchResults }
+  type MediaType = 'Anime' | 'Manga'
 
   let { data, mediaType }: { data: PageData, mediaType: MediaType } = $props();
   let mediaData = $state([data.searchData])
@@ -30,19 +30,8 @@ type MediaType = 'Anime' | 'Manga'
   const fetchNextPage = async () => {
     if (!pageInfo.hasNextPage || fetchingNextPage) return;
     fetchingNextPage = true
-    const params: SearchVariableParams = {
-      search: searchParams.get('term') || undefined,
-      genres: searchParams.get('genres') || undefined,
-      year: searchParams.get('year') || undefined,
-      season: searchParams.get('season') || undefined,
-      format: searchParams.get('format') || undefined,
-      status: searchParams.get('status') || undefined,
-      countryOfOrigin: searchParams.get('countryOfOrigin') || undefined,
-      isAdult: searchParams.get('adult') || undefined,
-      sort: searchParams.get('sort') || undefined
-    }
-    const options = searchOptions(params, pageInfo, mediaType)
-
+    const params = getParams(searchParams)
+    const options = searchOptions({params, pageInfo, mediaType})
     const response = await fetch(BASE_URL, options)
     const searchData: {data: SearchData} = await response.json()
     mediaData = [...mediaData, searchData.data]

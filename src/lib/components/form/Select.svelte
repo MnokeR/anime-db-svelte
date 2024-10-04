@@ -66,7 +66,7 @@
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      class={`w-[180px] justify-between truncate overflow-hidden ${selectedValue === options.title && "text-muted-foreground"}`}
+      class={`w-[140px] justify-between truncate overflow-hidden ${selectedValue === options.title && "text-muted-foreground"}`}
     >
       {selectedValue}
       {#if selectedValue === options.title}

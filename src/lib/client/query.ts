@@ -1,3 +1,5 @@
+import type { SearchVariables } from "$lib/types/types";
+
 export const BASE_URL = "https://graphql.anilist.co";
 
 const animeQuery =
@@ -68,17 +70,6 @@ export const animeSearchQuery =
 
 export const mangaSearchQuery = `query($page:Int = 1 $id:Int $type:MediaType $isAdult:Boolean = false $search:String $format:[MediaFormat]$status:MediaStatus $countryOfOrigin:CountryCode $source:MediaSource $season:MediaSeason $seasonYear:Int $year:String $onList:Boolean $yearLesser:FuzzyDateInt $yearGreater:FuzzyDateInt $episodeLesser:Int $episodeGreater:Int $durationLesser:Int $durationGreater:Int $chapterLesser:Int $chapterGreater:Int $volumeLesser:Int $volumeGreater:Int $licensedBy:[Int]$isLicensed:Boolean $genres:[String]$excludedGenres:[String]$tags:[String]$excludedTags:[String]$minimumTagRank:Int $sort:[MediaSort]=[POPULARITY_DESC,SCORE_DESC]){Page(page:$page,perPage:24){pageInfo{total perPage currentPage lastPage hasNextPage}media(id:$id type:$type season:$season format_in:$format status:$status countryOfOrigin:$countryOfOrigin source:$source search:$search onList:$onList seasonYear:$seasonYear startDate_like:$year startDate_lesser:$yearLesser startDate_greater:$yearGreater episodes_lesser:$episodeLesser episodes_greater:$episodeGreater duration_lesser:$durationLesser duration_greater:$durationGreater chapters_lesser:$chapterLesser chapters_greater:$chapterGreater volumes_lesser:$volumeLesser volumes_greater:$volumeGreater licensedById_in:$licensedBy isLicensed:$isLicensed genre_in:$genres genre_not_in:$excludedGenres tag_in:$tags tag_not_in:$excludedTags minimumTagRank:$minimumTagRank sort:$sort isAdult:$isAdult){id title{userPreferred}coverImage{extraLarge large color}startDate{year month day}endDate{year month day}bannerImage season seasonYear description type format status(version:2)episodes duration chapters volumes genres isAdult averageScore popularity nextAiringEpisode{airingAt timeUntilAiring episode}mediaListEntry{id status}studios(isMain:true){edges{isMain node{id name}}}}}}`;
 
-export type SearchVariableParams = {
-  search: string | undefined;
-  genres: string | undefined;
-  year: string | undefined;
-  season?: string | undefined;
-  format: string | undefined;
-  status: string | undefined;
-  countryOfOrigin: string | undefined;
-  isAdult: string | undefined;
-  sort: string | undefined;
-};
 export type PageInfo = {
   total: number;
   perPage: number;
@@ -87,16 +78,23 @@ export type PageInfo = {
   hasNextPage: boolean;
 };
 
-export const searchOptions = (
-  params: SearchVariableParams,
-  pageInfo: PageInfo,
-  mediaType: "Anime" | "Manga"
-) => {
+type SearchOptionsParams = {
+  params: SearchVariables;
+  pageInfo?: PageInfo;
+  mediaType: "Anime" | "Manga";
+};
+
+export const searchOptions = ({
+  params,
+  pageInfo,
+  mediaType,
+}: SearchOptionsParams) => {
   const genres = params.genres
     ? params.genres.split(",").map((item) => item.trim())
     : undefined;
+  const adult = params.isAdult === "True" ? true : false;
   const variables = {
-    page: pageInfo.currentPage + 1,
+    page: pageInfo ? pageInfo.currentPage + 1 : 1,
     type: mediaType === "Anime" ? "ANIME" : "MANGA",
     search: params.search,
     genres: genres,
@@ -105,7 +103,7 @@ export const searchOptions = (
     format: params.format,
     status: params.status,
     countryOfOrigin: params.countryOfOrigin,
-    isAdult: params.isAdult || false,
+    isAdult: adult,
     sort: params.sort
       ? params.sort
       : params.search
@@ -124,4 +122,25 @@ export const searchOptions = (
     }),
   };
   return options;
+};
+
+const searchableParams = [
+  "search",
+  "genres",
+  "year",
+  "season",
+  "format",
+  "status",
+  "countryOfOrigin",
+  "isAdult",
+  "sort",
+];
+
+export const getParams = (searchParam: URLSearchParams) => {
+  const searchParams: SearchVariables = {} as SearchVariables;
+  searchableParams.forEach((param) => {
+    searchParams[param as keyof SearchVariables] =
+      searchParam.get(param) || undefined;
+  });
+  return searchParams;
 };

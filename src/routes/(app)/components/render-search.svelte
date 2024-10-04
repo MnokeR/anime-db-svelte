@@ -1,6 +1,6 @@
 <script lang="ts">
   import AnimeCard from "$lib/components/AnimeCard.svelte";
-  import type { SearchResults } from "$lib/server/query-types";
+  import type { SearchResults } from "$lib/types/types";
 
   let { data }: { data: SearchResults } = $props();
 </script>
