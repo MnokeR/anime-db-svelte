@@ -24,6 +24,7 @@ export type AnimeShort = {
     color: string;
   };
   format: string;
+  type: string;
 };
 
 export type SearchResults = {

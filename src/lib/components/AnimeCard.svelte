@@ -21,16 +21,21 @@
       </div>
     {/if}
     {#key imageLoaded}
-      <img
-        class="rounded-xl w-full h-full object-cover transition-all"
-        src={data.coverImage.large}
-        alt={`Cover for ${data.title.userPreferred}`}
-        width={195}
-        height={279}
-        onload={handleImageLoad}
-        style="visibility: {imageLoaded ? 'visible' : 'hidden'};"
-        in:scale={{ duration: 300 }}
-      />
+      <a
+        href={`/${data.type.toLowerCase()}/${data.id}`}
+        aria-label="Link to Anime Page"
+      >
+        <img
+          class="rounded-xl w-full h-full object-cover transition-all"
+          src={data.coverImage.large}
+          alt={`Cover for ${data.title.userPreferred}`}
+          width={195}
+          height={279}
+          onload={handleImageLoad}
+          style="visibility: {imageLoaded ? 'visible' : 'hidden'};"
+          in:scale={{ duration: 300 }}
+        />
+      </a>
     {/key}
   </div>
   {#if imageLoaded}
