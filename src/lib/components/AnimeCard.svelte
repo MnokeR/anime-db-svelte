@@ -29,8 +29,9 @@
           class="rounded-xl w-full h-full object-cover transition-all"
           src={data.coverImage.large}
           alt={`Cover for ${data.title.userPreferred}`}
-          width={195}
-          height={279}
+          loading="lazy"
+          width="auto"
+          height="auto"
           onload={handleImageLoad}
           style="visibility: {imageLoaded ? 'visible' : 'hidden'};"
           in:scale={{ duration: 300 }}
