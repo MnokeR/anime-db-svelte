@@ -18,7 +18,7 @@
   const style = scoreStyles[Math.floor(media.averageScore / 10)];
 </script>
 
-<section>
+<section class="md:bg-secondary mx-auto max-w-screen-2xl mb-10">
   <Banner banner={media.bannerImage} />
   <div class="flex flex-col md:flex-row gap-4 p-4">
     <div class="flex justify-center md:justify-normal">
@@ -29,25 +29,28 @@
           alt="Cover"
         />
         {#if media.averageScore}
-          <div class="absolute bottom-0 left-[50%] translate-x-[-50%]">
-            <span class={`text-2xl px-2 rounded-t-md text-white ${style}`}
+          <div class="absolute -top-2 left-[50%] translate-x-[-50%]">
+            <span class={`text-2xl px-2 rounded-md shadow text-white ${style}`}
               >{media.averageScore}</span
             >
           </div>
         {/if}
       </div>
     </div>
-    <div class="flex-1">
-      <h1 class="text-xl font-serif">
-        {media?.title.userPreferred}
-      </h1>
-      <p class="text-muted-foreground">{@html media.description}</p>
+
+    <div class="flex-1 flex flex-col gap-4">
+      <div class="flex-1">
+        <h1 class="text-xl font-serif">
+          {media?.title.userPreferred}
+        </h1>
+        <p class="text-muted-foreground">{@html media.description}</p>
+      </div>
+
+      <div class="flex flex-none gap-2">
+        {#each media.genres as genre}
+          <span class="bg-destructive px-1 rounded-md">{genre}</span>
+        {/each}
+      </div>
     </div>
   </div>
 </section>
-
-<style>
-  section {
-    @apply md:bg-secondary mx-auto max-w-screen-2xl mb-10;
-  }
-</style>
