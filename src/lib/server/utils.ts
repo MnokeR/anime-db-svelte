@@ -7,13 +7,39 @@ import {
   mangaSearchQuery,
 } from "./query";
 
+// SEASONS AND DATES
+const date = new Date();
+const seasons = [
+  { label: "WINTER", months: [1, 2, 3] },
+  { label: "SPRING", months: [4, 5, 6] },
+  { label: "SUMMER", months: [7, 8, 9] },
+  { label: "FALL", months: [10, 11, 12] },
+];
+
+let season: string = "";
+let nextSeason: string = "";
+let nextYear: number = 0;
+const currentMonth = date.getMonth() + 1;
+const year = date.getFullYear();
+for (let i = 0; i < seasons.length; i++) {
+  if (seasons[i].months.includes(currentMonth)) {
+    season = seasons[i].label;
+    const currentIndex = i;
+    const nextIndex =
+      currentIndex === seasons.length - 1 ? 0 : currentIndex + 1;
+    nextSeason = seasons[nextIndex].label;
+    nextYear = currentIndex === seasons.length - 1 ? year + 1 : year;
+    break;
+  }
+}
+
 // FETCH OPTIONS DEFAULT ANIME
 const animeVariables = {
   type: "ANIME",
-  season: "SUMMER",
-  seasonYear: 2024,
-  nextSeason: "FALL",
-  nextYear: "2024",
+  season: season,
+  seasonYear: year,
+  nextSeason: nextSeason,
+  nextYear: nextYear,
 };
 
 export const animeOptions = {
@@ -40,10 +66,10 @@ export const animeCategories = [
 // FETCH OPTIONS DEFAULT MANGA
 const mangaVariables = {
   type: "MANGA",
-  season: "SUMMER",
-  seasonYear: 2024,
-  nextSeason: "FALL",
-  nextYear: 2024,
+  season: season,
+  seasonYear: year,
+  nextSeason: nextSeason,
+  nextYear: nextYear,
 };
 
 export const mangaCategories = [

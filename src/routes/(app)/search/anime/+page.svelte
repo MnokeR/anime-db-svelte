@@ -3,7 +3,6 @@
   import RenderPage from "../../components/render-page.svelte";
 
   let { data }: { data: PageData } = $props();
-  console.log(data);
   const mediaType = "Anime";
 </script>
 
