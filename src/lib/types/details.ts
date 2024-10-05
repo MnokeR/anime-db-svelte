@@ -2,7 +2,7 @@ export type DetailsPage = {
   Media: MediaDetails;
 };
 
-type MediaDetails = {
+export type MediaDetails = {
   id: string;
   title: { userPreferred: string };
   averageScore: number;

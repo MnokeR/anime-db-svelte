@@ -1,13 +1,15 @@
 <script lang="ts">
-  import { Loader } from "lucide-svelte";
   import type { LayoutData } from "../../$types";
+  import Description from "../../components/description.svelte";
 
   let { data }: { data: LayoutData } = $props();
+  let media = $state(data.details?.Media);
 </script>
 
-{#await data.details}
-  <Loader class="animate-spin" />
-{:then details}
-  {console.log(details)}
-  <!-- <img src={details.data.Media.bannerImage} alt="Banner" /> -->
-{/await}
+<svelte:head>
+  <title>{media?.title.userPreferred}</title>
+</svelte:head>
+
+{#if media}
+  <Description {media} />
+{/if}

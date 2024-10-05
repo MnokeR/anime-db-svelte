@@ -2,8 +2,8 @@
   import type { LayoutData } from "../$types";
   import RenderDefault from "./components/render-default.svelte";
   import { animeCategories } from "$lib/client/query";
-
-  let { data }: { data: LayoutData } = $props();
+  import type { PageData } from "./$types";
+  let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>

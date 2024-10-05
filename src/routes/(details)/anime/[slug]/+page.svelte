@@ -1,8 +1,14 @@
 <script lang="ts">
   import type { LayoutData } from "../../$types";
+  import Description from "../../components/description.svelte";
 
   let { data }: { data: LayoutData } = $props();
+  let media = data.details?.Media;
 </script>
 
-<img src={data.details?.Media.bannerImage} alt="Banner" />
-{data.details?.Media.title.userPreferred}
+<svelte:head>
+  <title>{media?.title.userPreferred}</title>
+</svelte:head>
+{#if media}
+  <Description {media} />
+{/if}
