@@ -2,12 +2,13 @@
   import { page } from "$app/stores";
   import Form from "$lib/components/form/Form.svelte";
   import SelectMediaType from "$lib/components/SelectMediaType.svelte";
-  import { animeCategories, BASE_URL, getParams, mangaCategories, searchOptions } from "$lib/client/query";
+  import { animeCategories, getParams, mangaCategories, searchOptions } from "$lib/client/utils";
   import type { Anime, Manga, SearchResults } from "$lib/types/types";
   import InView from "$lib/components/InView.svelte";
   import { Loader } from "lucide-svelte";
   import RenderDefault from "./render-default.svelte";
   import RenderSearch from "./render-search.svelte";
+  import { BASE_URL } from "$lib/client/query";
   
   type PageData = {
     layoutData: {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import RenderDefault from "./components/render-default.svelte";
-  import { animeCategories } from "$lib/client/query";
+  import { animeCategories } from "$lib/client/utils";
   import type { PageData } from "./$types";
   let { data }: { data: PageData } = $props();
 </script>
