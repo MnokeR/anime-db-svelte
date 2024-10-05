@@ -1,4 +1,4 @@
-import { animeOptions, mangaOptions } from "$lib/server/query";
+import { animeOptions, mangaOptions } from "$lib/server/utils";
 import type { Anime, Manga } from "$lib/types/types";
 import type { LayoutServerLoad } from "./$types";
 

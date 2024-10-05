@@ -1,4 +1,4 @@
-import { getParams, searchOptions } from "$lib/server/query";
+import { getParams, searchOptions } from "$lib/server/utils";
 import type { SearchResults } from "$lib/types/types";
 import type { ServerLoad } from "@sveltejs/kit";
 
