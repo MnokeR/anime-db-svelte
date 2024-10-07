@@ -1,3 +1,4 @@
+import type { MediaDetails } from "$lib/types/details";
 import type { SearchVariables } from "$lib/types/types";
 import { animeSearchQuery, mangaSearchQuery } from "./query";
 
@@ -92,4 +93,22 @@ export const getParams = (searchParam: URLSearchParams) => {
       searchParam.get(param) || undefined;
   });
   return searchParams;
+};
+
+export const animeInfoList = (media: MediaDetails) => {
+  return [
+    { label: "Native", info: media.title.native },
+    { label: "English", info: media.title.english },
+    { label: "Status", info: media.status },
+    {
+      label: "Start Date",
+      info:
+        media.startDate.month +
+        ", " +
+        media.startDate.day +
+        ", " +
+        media.startDate.year,
+    },
+    { label: "Season", info: media.season },
+  ];
 };

@@ -20,8 +20,8 @@
 
 <section class="md:bg-secondary mx-auto max-w-screen-2xl mb-10">
   <Banner banner={media.bannerImage} />
-  <div class="flex flex-col md:flex-row gap-4 p-4">
-    <div class="flex justify-center md:justify-normal">
+  <div class="flex flex-col md:flex-row gap-4">
+    <div class="flex justify-center md:justify-normal p-4">
       <div class="relative h-[360px]">
         <img
           class="bg-muted rounded-md w-[240px] h-[360px]"
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="flex-1 flex flex-col gap-4">
+    <div class="flex-1 flex flex-col gap-4 p-4">
       <div class="flex-1">
         <h1 class="text-xl font-serif">
           {media?.title.userPreferred}
@@ -48,7 +48,11 @@
 
       <div class="flex flex-none gap-2">
         {#each media.genres as genre}
-          <span class="bg-destructive px-1 rounded-md">{genre}</span>
+          <a
+            href={`/search/${media.type.toLowerCase()}?genres=${genre}`}
+            class="hover:scale-105 transition-transform duration-150 ease-in-out"
+            ><span class="bg-destructive px-1 rounded-md"> {genre}</span></a
+          >
         {/each}
       </div>
     </div>

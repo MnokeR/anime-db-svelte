@@ -4,7 +4,7 @@ export type DetailsPage = {
 
 export type MediaDetails = {
   id: string;
-  title: { userPreferred: string };
+  title: { userPreferred: string; native: string; english: string };
   averageScore: number;
   bannerImage: string;
   chapters: number;
@@ -27,7 +27,7 @@ export type MediaDetails = {
   season: string;
   seasonYear: number;
   source: string;
-  startData: { year: number; month: number; day: number };
+  startDate: { year: number; month: number; day: number };
   endDate: { year: number; month: number; day: number };
   status: string;
   studios: Studios;
